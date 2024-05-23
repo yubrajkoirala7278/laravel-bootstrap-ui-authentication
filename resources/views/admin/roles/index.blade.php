@@ -21,6 +21,7 @@
                             <td>{{ $key + 1 }}</td>
                             <td>{{ $role->name }}</td>
                             <td>
+                                <a href="{{route('add.permissions.to.role',$role->id)}}" class="btn btn-sm btn-success">Add/Edit Role Permission</a>
                                 <a href="{{ route('roles.edit', $role) }}" class="btn btn-warning btn-sm d-inline">Edit</a>
                                 <form action="{{ route('roles.destroy', $role->id) }}" method="POST" class="d-inline">
                                     @csrf

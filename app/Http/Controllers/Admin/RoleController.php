@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RoleRequest;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 
 class RoleController extends Controller
@@ -82,6 +85,35 @@ class RoleController extends Controller
             return back()->with('success', 'Role deleted successfully!');
         } catch (\Throwable $th) {
             return back()->with('error', $th->getMessage());
+        }
+    }
+
+    public function addPermissionToRole($roleId)
+    {
+        try {
+            $permissions = Permission::all();
+
+            $role = Role::findOrFail($roleId);
+
+            $rolePermissions = DB::table('role_has_permissions')
+            ->where('role_has_permissions.role_id', $role->id)
+            ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')->all();
+
+
+            return view('admin.roles.add-permissions', compact('permissions', 'role','rolePermissions'));
+        } catch (\Throwable $th) {
+            return back()->with('error', $th->getMessage());
+        }
+    }
+
+    public function givePermissionToRole(Request $request,$roleId)
+    {
+        try{
+            $role = Role::findOrFail($roleId);
+            $role->syncPermissions($request->permission);
+            return redirect()->back()->with('success','Permission added to role');
+        }catch(\Throwable $th){
+            return back()->with('error',$th->getMessage());
         }
     }
 }
