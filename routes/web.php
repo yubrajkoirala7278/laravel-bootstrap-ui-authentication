@@ -16,7 +16,6 @@ Auth::routes();
 // =========end of auth========
 
 // ========admin===============
-// Route::get('/admin/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::middleware(['auth.admin'])->group(function () {
     Route::prefix('admin')->group(function () {
         require __DIR__ . '/admin.php';

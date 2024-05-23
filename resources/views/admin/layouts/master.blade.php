@@ -161,15 +161,22 @@
 
             <li class="nav-item ">
                 <a class="nav-link collapsed" href="">
-                    <i class="fa-solid fa-user"></i>
-                    <span>Posts</span>
+                    <i class="fa-solid fa-blog"></i>
+                    <span>Blogs</span>
                 </a>
             </li>
 
             <li class="nav-item ">
                 <a class="nav-link collapsed" href="">
-                    <i class="fa-solid fa-user"></i>
+                    <i class="fa-regular fa-newspaper"></i>
                     <span>News</span>
+                </a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="nav-link collapsed" href="{{route('permissions.index')}}">
+                    <i class="fa-solid fa-user"></i>
+                    <span>Users</span>
                 </a>
             </li>
           
