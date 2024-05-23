@@ -174,7 +174,21 @@
             </li>
 
             <li class="nav-item ">
+                <a class="nav-link collapsed" href="{{route('roles.index')}}">
+                    <i class="fas fa-tasks"></i>
+                    <span>Roles</span>
+                </a>
+            </li>
+
+            <li class="nav-item ">
                 <a class="nav-link collapsed" href="{{route('permissions.index')}}">
+                    <i class="fa-solid fa-user-lock"></i>
+                    <span>Permissions</span>
+                </a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="nav-link collapsed" href="">
                     <i class="fa-solid fa-user"></i>
                     <span>Users</span>
                 </a>
