@@ -16,7 +16,7 @@ Login
         {{-- email --}}
         <div class="col-12">
             <label for="email" class="form-label">Email</label>
-            <input type="email" name="email" class="form-control" value="{{old('email')}}">
+            <input type="email" name="email" class="form-control" value="{{old('email')}}" autocomplete="off">
             @if ($errors->has('email'))
             <span class="text-danger">{{$errors->first('email')}}</span>
             @endif
@@ -26,7 +26,7 @@ Login
         <div class="col-12">
             <label for="password" class="form-label">Password</label>
             <div class="password-field">
-                <input type="password" name="password" class="form-control">
+                <input type="password" name="password" class="form-control" autocomplete="off">
                 <button type="button" class="btn btn-transparent toggle-password" data-target="password">
                     <i class="far fa-eye"></i>
                 </button>

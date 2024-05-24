@@ -188,7 +188,7 @@
             </li>
 
             <li class="nav-item ">
-                <a class="nav-link collapsed" href="">
+                <a class="nav-link collapsed" href="{{route('users.index')}}">
                     <i class="fa-solid fa-user"></i>
                     <span>Users</span>
                 </a>
