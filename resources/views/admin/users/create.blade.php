@@ -2,7 +2,7 @@
 @section('content')
     <div class="p-4 bg-white">
         <div class="d-flex justify-content-between align-items-center">
-            <h2 class="fw-semibold fs-5">Edit Users</h2>
+            <h2 class="fw-semibold fs-5">Users</h2>
             <a href="" class="btn btn-primary">Back</a>
         </div>
         <form action="{{ route('users.store') }}" method="POST" autocomplete="off">

@@ -25,7 +25,10 @@ class UserRequest extends FormRequest
         return [
             'name'=>['required','string','max:255'],
             'email'=>['required','email','max:255',Rule::unique('users')->ignore($this->user)],
-            'password'=>['required','string','min:8','max:20'],
+            'password' => array_merge(
+                ['string', 'min:8', 'max:20'],
+                $this->isMethod('post') ? ['required'] : ['nullable']
+            ),
             'roles'=>['required']
         ];
     }

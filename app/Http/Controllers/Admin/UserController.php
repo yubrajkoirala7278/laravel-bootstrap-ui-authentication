@@ -12,21 +12,17 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
         try {
-            return view('admin.users.index');
+            $users = User::latest()->get();
+            return view('admin.users.index', compact('users'));
         } catch (\Throwable $th) {
             return back()->with('error', $th->getMessage());
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         try {
@@ -37,9 +33,6 @@ class UserController extends Controller
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(UserRequest $request)
     {
         try {
@@ -52,41 +45,53 @@ class UserController extends Controller
             $user->syncRoles($request->roles);
 
             return redirect()->route('users.index')->with('success', 'User added successfully!');
-
         } catch (\Throwable $th) {
             return back()->with('error', $th->getMessage());
         }
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function edit(User $user)
     {
-        //
+        try {
+            $roles = Role::pluck('name', 'name')->all();
+            $userRoles = $user->roles->pluck('name', 'name')->all();
+            return view('admin.users.edit', compact('user', 'roles', 'userRoles'));
+        } catch (\Throwable $th) {
+            return back()->with('error', $th->getMessage());
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function update(UserRequest $request, User $user)
     {
-        //
+        try {
+            $data = [
+                'name' => $request->name,
+                'email' => $request->email,
+            ];
+
+            if (!empty($request->password)) {
+                $data += [
+                    'password' => Hash::make($request->password),
+                ];
+            }
+
+            $user->update($data);
+
+            $user->syncRoles($request->roles);
+
+            return redirect()->route('users.index')->with('success', 'User updated successfully!');
+        } catch (\Throwable $th) {
+            return back()->with('error', $th->getMessage());
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function destroy(User $user)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        try {
+            $user->delete();
+            return back()->with('success', 'User deleted successfully!');
+        } catch (\Throwable $th) {
+            return back()->with('error', $th->getMessage());
+        }
     }
 }
