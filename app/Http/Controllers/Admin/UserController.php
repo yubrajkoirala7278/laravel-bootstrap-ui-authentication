@@ -12,6 +12,12 @@ use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
+    // public function __construct() {
+    //     // permission with "edit user" can only access edit and update routes of user controller
+    //     $this->middleware('permission:edit user',['only'=>['edit','update']]);
+    //     // permission with "delete user" can only access destroy route of user controller
+    //     $this->middleware('permission:delete user',['only'=>['destroy']]);
+    // }
 
     public function index()
     {
